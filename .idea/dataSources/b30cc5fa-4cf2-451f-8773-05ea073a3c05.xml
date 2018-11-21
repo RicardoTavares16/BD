@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="oracle11g">
+  <database-model serializer="dbm" rdbms="ORACLE" format-version="4.11">
+    <root id="1">
+      <ServerVersion>11.2.0.2</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="BD">
+      <ObjectId>48</ObjectId>
+      <IntrospectionTimestamp>2018-11-21.15:54:32</IntrospectionTimestamp>
+      <CreatedTimestamp>2013-09-19.16:13:57</CreatedTimestamp>
+      <ModifiedTimestamp>2013-09-19.16:14:58</ModifiedTimestamp>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="PUBLIC">
+      <ObjectId>1</ObjectId>
+    </schema>
+    <schema id="4" parent="1" name="SYS">
+      <ObjectId>0</ObjectId>
+    </schema>
+    <schema id="5" parent="1" name="SYSTEM">
+      <ObjectId>5</ObjectId>
+    </schema>
+    <schema id="6" parent="1" name="OUTLN">
+      <ObjectId>9</ObjectId>
+    </schema>
+    <schema id="7" parent="1" name="CTXSYS">
+      <ObjectId>32</ObjectId>
+    </schema>
+    <schema id="8" parent="1" name="XDB">
+      <ObjectId>34</ObjectId>
+    </schema>
+    <schema id="9" parent="1" name="ANONYMOUS">
+      <ObjectId>35</ObjectId>
+    </schema>
+    <schema id="10" parent="1" name="MDSYS">
+      <ObjectId>42</ObjectId>
+    </schema>
+    <schema id="11" parent="1" name="HR">
+      <ObjectId>43</ObjectId>
+    </schema>
+    <schema id="12" parent="1" name="FLOWS_FILES">
+      <ObjectId>44</ObjectId>
+    </schema>
+    <schema id="13" parent="1" name="APEX_PUBLIC_USER">
+      <ObjectId>45</ObjectId>
+    </schema>
+    <schema id="14" parent="1" name="APEX_040000">
+      <ObjectId>47</ObjectId>
+    </schema>
+    <schema id="15" parent="1" name="XS$NULL">
+      <ObjectId>2147483638</ObjectId>
+    </schema>
+    <table id="16" parent="2" name="DEP">
+      <ObjectId>20051</ObjectId>
+      <CreatedTimestamp>2013-09-19.16:14:53</CreatedTimestamp>
+      <ModifiedTimestamp>2013-09-19.16:14:53</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="17" parent="2" name="DESCONTOS">
+      <ObjectId>20049</ObjectId>
+      <CreatedTimestamp>2013-09-19.16:14:49</CreatedTimestamp>
+      <ModifiedTimestamp>2013-09-19.16:14:49</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="18" parent="2" name="EMP">
+      <ObjectId>20053</ObjectId>
+      <CreatedTimestamp>2013-09-19.16:14:58</CreatedTimestamp>
+      <ModifiedTimestamp>2013-09-19.16:14:58</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <routine id="19" parent="2" name="SQUIRREL_GET_ERROR_OFFSET">
+      <ObjectId>20048</ObjectId>
+      <RoutineKind>function</RoutineKind>
+      <SourceTextLength>461</SourceTextLength>
+      <DependsOnIds>4969,4852</DependsOnIds>
+      <CreatedTimestamp>2013-09-19.16:13:57</CreatedTimestamp>
+      <ModifiedTimestamp>2013-09-19.16:13:57</ModifiedTimestamp>
+    </routine>
+    <column id="20" parent="16" name="NDEP">
+      <Position>1</Position>
+      <DataType>NUMBER(2 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="21" parent="16" name="NOME">
+      <Position>2</Position>
+      <DataType>VARCHAR2(15 byte)|0s</DataType>
+    </column>
+    <column id="22" parent="16" name="LOCAL">
+      <Position>3</Position>
+      <DataType>VARCHAR2(15 byte)|0s</DataType>
+    </column>
+    <index id="23" parent="16" name="PK_NDEP_DEP">
+      <ObjectId>20052</ObjectId>
+      <CreatedTimestamp>2013-09-19.16:14:53</CreatedTimestamp>
+      <ModifiedTimestamp>2013-09-19.16:14:53</ModifiedTimestamp>
+      <TablespaceName>SYSTEM</TablespaceName>
+      <ColNames>NDEP</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="24" parent="16" name="PK_NDEP_DEP">
+      <ModifiedTimestamp>2013-09-19.16:14:53</ModifiedTimestamp>
+      <ColNames>NDEP</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>PK_NDEP_DEP</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <check id="25" parent="16" name="NN_NOME_DEP">
+      <ModifiedTimestamp>2013-09-19.16:14:53</ModifiedTimestamp>
+      <ColNames>NOME</ColNames>
+      <Predicate>nome   IS NOT NULL</Predicate>
+    </check>
+    <check id="26" parent="16" name="NN_LOCAL_DEP">
+      <ModifiedTimestamp>2013-09-19.16:14:53</ModifiedTimestamp>
+      <ColNames>LOCAL</ColNames>
+      <Predicate>local  IS NOT NULL</Predicate>
+    </check>
+    <column id="27" parent="17" name="ESCALAO">
+      <Position>1</Position>
+      <DataType>NUMBER(2 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="17" name="SALINF">
+      <Position>2</Position>
+      <DataType>NUMBER(7 digit)|0s</DataType>
+    </column>
+    <column id="29" parent="17" name="SALSUP">
+      <Position>3</Position>
+      <DataType>NUMBER(7 digit)|0s</DataType>
+    </column>
+    <index id="30" parent="17" name="PK_ESC_DESCONTOS">
+      <ObjectId>20050</ObjectId>
+      <CreatedTimestamp>2013-09-19.16:14:49</CreatedTimestamp>
+      <ModifiedTimestamp>2013-09-19.16:14:49</ModifiedTimestamp>
+      <TablespaceName>SYSTEM</TablespaceName>
+      <ColNames>ESCALAO</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="31" parent="17" name="PK_ESC_DESCONTOS">
+      <ModifiedTimestamp>2013-09-19.16:14:49</ModifiedTimestamp>
+      <ColNames>ESCALAO</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>PK_ESC_DESCONTOS</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <check id="32" parent="17" name="NN_INF_DESCONTOS">
+      <ModifiedTimestamp>2013-09-19.16:14:49</ModifiedTimestamp>
+      <ColNames>SALINF</ColNames>
+      <Predicate>salinf IS NOT NULL</Predicate>
+    </check>
+    <check id="33" parent="17" name="NN_SUP_DESCONTOS">
+      <ModifiedTimestamp>2013-09-19.16:14:49</ModifiedTimestamp>
+      <ColNames>SALSUP</ColNames>
+      <Predicate>salsup IS NOT NULL</Predicate>
+    </check>
+    <column id="34" parent="18" name="NEMP">
+      <Position>1</Position>
+      <DataType>NUMBER(4 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="18" name="NOME">
+      <Position>2</Position>
+      <DataType>VARCHAR2(20 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="18" name="FUNCAO">
+      <Position>3</Position>
+      <DataType>VARCHAR2(12 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="37" parent="18" name="ENCAR">
+      <Position>4</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+    </column>
+    <column id="38" parent="18" name="DATA_ENTRADA">
+      <Position>5</Position>
+      <DataType>DATE|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>sysdate                        
+                              </DefaultExpression>
+    </column>
+    <column id="39" parent="18" name="SAL">
+      <Position>6</Position>
+      <DataType>NUMBER(7 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="18" name="PREMIOS">
+      <Position>7</Position>
+      <DataType>NUMBER(7 digit)|0s</DataType>
+      <DefaultExpression>NULL                          </DefaultExpression>
+    </column>
+    <column id="41" parent="18" name="NDEP">
+      <Position>8</Position>
+      <DataType>NUMBER(2 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="42" parent="18" name="PK_NEMP_EMP">
+      <ObjectId>20054</ObjectId>
+      <CreatedTimestamp>2013-09-19.16:14:58</CreatedTimestamp>
+      <ModifiedTimestamp>2013-09-19.16:14:58</ModifiedTimestamp>
+      <TablespaceName>SYSTEM</TablespaceName>
+      <ColNames>NEMP</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="43" parent="18" name="PK_NEMP_EMP">
+      <ModifiedTimestamp>2013-09-19.16:14:58</ModifiedTimestamp>
+      <ColNames>NEMP</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>PK_NEMP_EMP</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="44" parent="18" name="FK_ENCAR_EMP">
+      <ModifiedTimestamp>2013-09-19.16:14:58</ModifiedTimestamp>
+      <ColNames>ENCAR</ColNames>
+      <RefSchemaName>BD</RefSchemaName>
+      <RefTableName>EMP</RefTableName>
+      <RefKeyName>PK_NEMP_EMP</RefKeyName>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="45" parent="18" name="FK_NDEP_EMP">
+      <ModifiedTimestamp>2013-09-19.16:14:58</ModifiedTimestamp>
+      <ColNames>NDEP</ColNames>
+      <RefSchemaName>BD</RefSchemaName>
+      <RefTableName>DEP</RefTableName>
+      <RefKeyName>PK_NDEP_DEP</RefKeyName>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <check id="46" parent="18" name="NN_NOME_EMP">
+      <ModifiedTimestamp>2013-09-19.16:14:58</ModifiedTimestamp>
+      <ColNames>NOME</ColNames>
+      <Predicate>&quot;NOME&quot; IS NOT NULL</Predicate>
+    </check>
+    <check id="47" parent="18" name="NN_FUNCAO_EMP">
+      <ModifiedTimestamp>2013-09-19.16:14:58</ModifiedTimestamp>
+      <ColNames>FUNCAO</ColNames>
+      <Predicate>&quot;FUNCAO&quot; IS NOT NULL</Predicate>
+    </check>
+    <check id="48" parent="18" name="NN_DATA_EMP">
+      <ModifiedTimestamp>2013-09-19.16:14:58</ModifiedTimestamp>
+      <ColNames>DATA_ENTRADA</ColNames>
+      <Predicate>&quot;DATA_ENTRADA&quot; IS NOT NULL</Predicate>
+    </check>
+    <check id="49" parent="18" name="NN_SAL_EMP">
+      <ModifiedTimestamp>2013-09-19.16:14:58</ModifiedTimestamp>
+      <ColNames>SAL</ColNames>
+      <Predicate>&quot;SAL&quot; IS NOT NULL</Predicate>
+    </check>
+    <check id="50" parent="18" name="NN_NDEP_EMP">
+      <ModifiedTimestamp>2013-09-19.16:14:58</ModifiedTimestamp>
+      <ColNames>NDEP</ColNames>
+      <Predicate>&quot;NDEP&quot; IS NOT NULL</Predicate>
+    </check>
+    <argument id="51" parent="19">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>NUMBER|0s</DataType>
+    </argument>
+    <argument id="52" parent="19" name="QUERY">
+      <Position>1</Position>
+      <DataType>VARCHAR2|0s</DataType>
+    </argument>
+  </database-model>
+</dataSource>
