@@ -1,4 +1,6 @@
+import java.io.File;
 import java.sql.*;
+import java.util.List;
 
 public class Main {
 
@@ -85,4 +87,68 @@ public class Main {
         }
 
     }
+
+    public boolean login(String user, String pass){
+        return true;
+    }
+
+    public boolean registo(String user, String pass){
+        return true;
+    }
+
+    public Boolean addMusic(String name){
+        return true;
+    }
+
+    public Boolean addAlbum(String name){
+        return true;
+    }
+
+    public Boolean addArtist(String name){
+        return true;
+    }
+
+    public String getAlbuns(){
+        String x = "";
+        return x;
+    }
+
+    public String getAlbumData(String x){
+        return x;
+    }
+
+    public String getArtistData(String x){
+        return x;
+    }
+
+    public Boolean editAlbumData(String user, String nomeAlbum){
+        return true;
+    }
+
+    public Boolean editAlbumName(String user, String nomeAtual, String name){
+        return true;
+    }
+
+    public Boolean editAlbumDetails (String user, String nomeAlbum, String details){
+        return true;
+    }
+
+    public Boolean addReview(String user, String album, String review){
+        return true;
+    }
+
+    public void pesquisaArtista(String s){
+
+    }
+
+    public void pesquisaAlbum(String s){
+
+    }
+
+    public boolean makeEditor( String user1, String user2){
+        return true;
+    }
+
+
+
 }
