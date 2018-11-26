@@ -172,12 +172,9 @@ public class Main {
     public boolean makeEditor( String user1, String user2){
 
         if(checkEditor(user1)){
-            System.out.println("ENTREI IF");
             String query = String.format("UPDATE UTILIZADOR SET EDITOR = 1 WHERE USERNAME like '%s'", user2);
             try {
-                System.out.println(query);
                 stmt.executeQuery(query);
-                System.out.println("FIZ QUERY");
                 return true;
             } catch (SQLException e) {
                 e.printStackTrace();
