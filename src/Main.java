@@ -16,7 +16,7 @@ public class Main {
             return;
 
         }
-        System.out.println("JDBC Driver funciona .. tentar a ligacao");
+       // System.out.println("JDBC Driver funciona .. tentar a ligacao");
         System.out.println("JDBC Driver works .. attempting connection");
         Connection connection = null;
 
@@ -26,7 +26,7 @@ public class Main {
                     "bd",
                     "bd");
         } catch (SQLException e) {
-            System.out.println("Ligacao falhou.. erro:");
+            //System.out.println("Ligacao falhou.. erro:");
             System.out.println("Connection failed error:");
             e.printStackTrace();
             return;
@@ -34,10 +34,10 @@ public class Main {
         }
 
         if (connection != null) {
-            System.out.println("Ligação feita com sucessso");
+            //System.out.println("Ligação feita com sucessso");
             System.out.println("Connected with success");
         } else {
-            System.out.println("Nao conseguimos estabelecer a ligacao");
+            //System.out.println("Nao conseguimos estabelecer a ligacao");
             System.out.println("Connection not established");
         }
 
@@ -54,7 +54,7 @@ public class Main {
                 System.out.println("Erro nao foi possível criar uma statement ou retornou null");
                 System.exit(-1);
             }
-
+            /*
             String query = "SELECT * FROM EMP";
             System.out.println("querying: "+ query);
             ResultSet res = stmt.executeQuery(query);
@@ -69,7 +69,7 @@ public class Main {
                 System.out.print(rsmd.getColumnName(i) +", ");
             }*/
 
-
+/*
             while (res.next()) {
                 // Listar o resultado da query
                 // List the result from the query
@@ -80,6 +80,7 @@ public class Main {
                 }
                 System.out.println("");
             }
+            */
         } catch (SQLException e) {
             e.printStackTrace();
         }
