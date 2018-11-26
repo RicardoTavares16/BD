@@ -169,7 +169,7 @@
       <ObjectId>20048</ObjectId>
       <RoutineKind>function</RoutineKind>
       <SourceTextLength>461</SourceTextLength>
-      <DependsOnIds>4969,4852</DependsOnIds>
+      <DependsOnIds>4852,4969</DependsOnIds>
       <CreatedTimestamp>2013-09-19.16:13:57</CreatedTimestamp>
       <ModifiedTimestamp>2013-09-19.16:13:57</ModifiedTimestamp>
     </routine>
@@ -523,7 +523,7 @@
       <DataType>DATE|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>sysdate                        
-                              </DefaultExpression>
+</DefaultExpression>
     </column>
     <column id="96" parent="25" name="SAL">
       <Position>6</Position>
@@ -533,7 +533,7 @@
     <column id="97" parent="25" name="PREMIOS">
       <Position>7</Position>
       <DataType>NUMBER(7 digit)|0s</DataType>
-      <DefaultExpression>NULL                          </DefaultExpression>
+      <DefaultExpression>NULL</DefaultExpression>
     </column>
     <column id="98" parent="25" name="NDEP">
       <Position>8</Position>

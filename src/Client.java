@@ -295,7 +295,6 @@ public class Client {
                             case 1:
                                 System.out.println("Utilizador");
                                 String user2 = string.nextLine();
-                                System.out.println(user2);
                                 if (Main.makeEditor(useratual, user2)) {
                                     System.out.println("Permissão dada");
                                 } else
