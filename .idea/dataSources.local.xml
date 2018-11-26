@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="oracle11g" uuid="b30cc5fa-4cf2-451f-8773-05ea073a3c05">
+    <data-source name="oracle" uuid="154f0860-e743-42ce-934d-a3d36319d7bb">
       <database-info product="Oracle" version="Oracle Database 11g Express Edition Release 11.2.0.2.0 - Production" jdbc-version="4.0" driver-name="Oracle JDBC driver" driver-version="12.1.0.2.0" family="ORACLE" exact-version="11.2.0.2">
         <extra-name-characters>$#</extra-name-characters>
         <identifier-quote-string>&quot;</identifier-quote-string>
@@ -9,7 +9,6 @@
       <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>bd</user-name>
-      <introspection-schemas>*:@</introspection-schemas>
     </data-source>
   </component>
 </project>

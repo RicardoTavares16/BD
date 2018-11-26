@@ -65,7 +65,9 @@ public class Client {
                     String nome2 = sc.next();
                     System.out.println("Password:");
                     String pass2 = sc.next();
-                    if (Main.registo(nome2, pass2)) {
+                    System.out.println("Editor? ");
+                    int editor = sc.nextInt();
+                    if (Main.registo(nome2, pass2, editor)) {
                         System.out.println("Registo bem sucedido");
                         menu();
                     } else {
@@ -199,8 +201,6 @@ public class Client {
                             case 1:
                                 System.out.println("Nome do artista:");
                                 String s = scanner.nextLine();
-
-                                System.out.println(s);
                                 System.out.println(Main.getArtistData(s));
                                 break;
                             case 2:
@@ -214,7 +214,6 @@ public class Client {
                                 break;
                         }
                         break;
-
                     case Adicao:
                         switch (input) {
                             case 1:
@@ -242,9 +241,12 @@ public class Client {
                             case 3:
                                 // Add Artist
                                 System.out.println("Nome do artista para adicionar: ");
-                                String q = scanner.nextLine();
-                                System.out.println(q);
-                                if(Main.addArtist(q)) {
+                                String nome = scanner.nextLine();
+                                System.out.println("Biografia: ");
+                                String bio = scanner.nextLine();
+                                System.out.println("Data: (dd/mm/yyyy)");
+                                String data = scanner.nextLine();
+                                if(Main.addArtist(nome, bio, data)) {
                                     System.out.println("Feito");
                                 } else {
                                     System.out.println("Falha");
@@ -329,7 +331,7 @@ public class Client {
      * Enum do menu
      */
     public enum Menu {
-        Inicial, Albuns, AlbunsExt, Pesquisa, Pesquisacont, Playlists, Gestao, Upload, Adicao
+        Inicial, Albuns, AlbunsExt, Adicao, Pesquisa, Pesquisacont, Playlists, Gestao, Upload,
     }
 
     /**
@@ -372,6 +374,14 @@ public class Client {
                 System.out.println("0 - Voltar");
                 System.out.println("-> ");
                 break;
+            case Adicao:
+                System.out.println("-----Adicionar-----");
+                System.out.println("1 - Adicionar nova musica:");
+                System.out.println("2 - Adicionar novo album:");
+                System.out.println("3 - Adicionar novo artista:");
+                System.out.println("0 - Voltar");
+                System.out.println("-> ");
+                break;
             case Playlists:
                 System.out.println("-----Playlists-----");
                 System.out.println("1 - Listar Playlists");
@@ -404,6 +414,7 @@ public class Client {
 
             client = new Client();
             Main = new Main();
+            Main.connect();
             client.login();
 
 
