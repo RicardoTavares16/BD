@@ -1,5 +1,6 @@
 import java.io.File;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -236,7 +237,17 @@ public class Main {
         return true;
     }
 
-    public Boolean addReview(String user, String album, String review){
+    // @TODO: PASSAR A USAR IDS
+    public Boolean addReview(String user, String album, String review, int score){
+
+        String query = String.format("INSERT INTO CRITICA (IDCRITICA, TEXTO, PONTUACAO, UTILIZADOR_USERNAME, ALBUM_IDALBUM) VALUES (idcritica_seq.nextval, '%s', %d, '%s', 1)", review, score, user);
+        try {
+            stmt.executeQuery(query);
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            System.out.println("Não foi possível adicionar review");
+            return false;
+        }
         return true;
     }
 
@@ -274,6 +285,17 @@ public class Main {
             e.printStackTrace();
         }
         return false;
+    }
+
+    // @TODO:Fazer esta parte
+    public void makePlaylist(String user, String nome, ArrayList<String> lista){
+
+        String query = String.format("INSERT INTO playlist (IDPLAYLIST, NOME, UTILIZADOR_USERNAME) VALUES (idplaylist_seq.nextval, '%s', '%s'", nome, user);
+        try {
+            stmt.executeQuery(query);
+        } catch (SQLException e) {
+            System.out.println("Não foi possível inserir lista");
+        }
     }
 
 

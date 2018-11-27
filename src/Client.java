@@ -140,13 +140,15 @@ public class Client {
                     case AlbunsExt:
                         switch (input) {
                             case 1:
-                                // user cant use: * or ; or |
-                                System.out.println("Critica:");
+                                // Add review
+                                System.out.println("Critica: ");
+                                scanner.nextLine();
                                 String review = scanner.nextLine();
-                                System.out.println("Pontuação:");
-                                String tmp = sc.next();
-                                review = review + "*" + tmp;
-                                if (Main.addReview(useratual, album, review)) {
+                                System.out.println("Pontuacao: ");
+                                String tmp = scanner.nextLine();
+                                int score = Integer.parseInt(tmp);
+
+                                if (Main.addReview(useratual, album, review, score)) {
                                     System.out.println("Sucesso");
                                 } else {
                                     System.out.println("Falha");
@@ -272,7 +274,7 @@ public class Client {
                                 }while (!musica.equals("fim"));
                                 int size = musicas.size();
                                 musicas.remove(size-1);
-                                System.out.println("cria playlist");
+                                Main.makePlaylist(useratual, nomePlaylist, musicas);
                                 break;
                             case 0:
                                 menu = Menu.Inicial;
