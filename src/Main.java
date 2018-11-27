@@ -16,7 +16,7 @@ public class Main {
             return;
 
         }
-       // System.out.println("JDBC Driver funciona .. tentar a ligacao");
+
         System.out.println("JDBC Driver works .. attempting connection");
         Connection connection = null;
 
@@ -26,7 +26,6 @@ public class Main {
                     "bd",
                     "bd");
         } catch (SQLException e) {
-            //System.out.println("Ligacao falhou.. erro:");
             System.out.println("Connection failed error:");
             e.printStackTrace();
             return;
@@ -34,10 +33,8 @@ public class Main {
         }
 
         if (connection != null) {
-            //System.out.println("Ligação feita com sucessso");
             System.out.println("Connected with success");
         } else {
-            //System.out.println("Nao conseguimos estabelecer a ligacao");
             System.out.println("Connection not established");
         }
 
@@ -60,7 +57,6 @@ public class Main {
             ResultSet res = stmt.executeQuery(query);
 
             // para podermos saber quantas colunas o resultado tem
-            // To check how many columns does the result holds
             ResultSetMetaData rsmd = res.getMetaData();
             int columnsNumber = rsmd.getColumnCount();
 
@@ -68,19 +64,16 @@ public class Main {
             /*for(int i = 1 ; i <= columnsNumber ; i++){
                 System.out.print(rsmd.getColumnName(i) +", ");
             }*/
-
 /*
             while (res.next()) {
                 // Listar o resultado da query
-                // List the result from the query
                 for (int i = 1; i <= columnsNumber; i++) {
                     if (i > 1) System.out.print(",  ");
                     String columnValue = res.getString(i);
                     System.out.print(columnValue);
                 }
                 System.out.println("");
-            }
-            */
+            }*/
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -119,30 +112,116 @@ public class Main {
         return true;
     }
 
-    public Boolean addMusic(String name) {
+    public Boolean addMusic(String user, String name, String data) {
+
+    if(checkEditor(user)) {
+        String query = String.format("INSERT INTO musica (idmusica, nome, data) VALUES (idmusica_seq.nextval, '%s', TO_DATE('%s', 'dd/mm/yyyy'))", name, data);
+        try {
+            stmt.executeQuery(query);
+        } catch (SQLException e) {
+            System.out.println("Erro ao adicionar musica.");
+            return false;
+        }
         return true;
     }
-
-    public Boolean addAlbum(String name){
-        return true;
+    else
+        return false;
     }
 
-    public Boolean addArtist(String name, String bio, String data){
-        String query = String.format("INSERT INTO artista (idartista, username, password, editor) VALUES (idartista_seq.nextval, '%s', '%s', %s)", name, bio, data);
-        return true;
+    public Boolean addAlbum(String user, String name, String genero, String data){
+
+        if(checkEditor(user)) {
+            String query = String.format("INSERT INTO album (idalbum, nome, genero, data) VALUES (idalbum_seq.nextval, '%s', '%s', TO_DATE('%s', 'dd/mm/yyyy'))", name, genero, data);
+            try {
+                stmt.executeQuery(query);
+            } catch (SQLException e) {
+                System.out.println("Não foi possível inserir album");
+                return false;
+            }
+            return true;
+        }
+        else
+            return false;
     }
 
-    public String getAlbuns(){
-        String x = "";
-        return x;
+    public Boolean addArtist(String user, String name, String bio, String data){
+
+        if(checkEditor(user)) {
+            String query = String.format("INSERT INTO artista (idartista, nome, biografia, data) VALUES (idartista_seq.nextval, '%s', '%s', TO_DATE('%s', 'dd/mm/yyyy'))", name, bio, data);
+            try {
+                stmt.executeQuery(query);
+            } catch (SQLException e) {
+                System.out.println("Erro ao adicionar artista.");
+                return false;
+            }
+            return true;
+        }
+        else
+            return false;
     }
 
-    public String getAlbumData(String x){
-        return x;
+    public void getAlbuns() {
+        String query = "SELECT * FROM album";
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                System.out.println(res.getString("nome"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao obter todos os albuns.");
+        }
     }
 
-    public String getArtistData(String x){
-        return x;
+    public void getAlbunsByArtist(String nameArtist) {
+        ResultSet res;
+        String tmp;
+        String query = String.format("SELECT * FROM artista art, album a, album_artista aa WHERE aa.album_idalbum = a.idalbum AND aa.artista_idartista = art.idartista AND art.name like '%s'", nameArtist);
+        try {
+            res = stmt.executeQuery(query);
+
+            while (res.next()) {
+                tmp = res.getString("nome");
+                System.out.println(tmp);
+            }
+        } catch (SQLException e) {
+            System.out.println("Não foi possível obter albuns");
+            return;
+        }
+    }
+
+    public void getAlbumData(String x){
+        String query = String.format("SELECT nome, genero, data FROM album WHERE nome like '%s'", x);
+
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                System.out.println("Nome: " + res.getString("nome"));
+                System.out.println("Género: " + res.getString("genero"));
+                System.out.println("Data de lançamento: " + res.getString("data"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao obter informações de album");
+        }
+    }
+
+    public void getArtistData(String x){
+
+        String query = String.format("SELECT nome, biografia, data FROM artista WHERE nome like '%s'", x);
+
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                System.out.println("Nome: " + res.getString("nome"));
+                System.out.println("Biografia: " + res.getString("biografia"));
+                System.out.println("Data de lançamento: " + res.getString("data"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao obter informações do artista");
+        }
+
+        System.out.println("Alguns lançados:");
+        getAlbunsByArtist(x);
+
     }
 
     public Boolean editAlbumData(String user, String nomeAlbum){
@@ -159,14 +238,6 @@ public class Main {
 
     public Boolean addReview(String user, String album, String review){
         return true;
-    }
-
-    public void pesquisaArtista(String s){
-
-    }
-
-    public void pesquisaAlbum(String s){
-
     }
 
     public boolean makeEditor( String user1, String user2){

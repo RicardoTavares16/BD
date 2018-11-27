@@ -1,15 +1,7 @@
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.rmi.*;
-import java.rmi.server.*;
-import java.net.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-
-import static java.lang.Integer.parseInt;
 
 /**
  * Classe da Interface de Utilizador
@@ -108,8 +100,7 @@ public class Client {
                         switch (input) {
                             case 1:
                                 menu = Menu.Albuns;
-                                String albumList = Main.getAlbuns();
-                                System.out.println(albumList);
+                                Main.getAlbuns();
                                 break;
                             case 2:
                                 menu = Menu.Pesquisa;
@@ -121,8 +112,10 @@ public class Client {
                                 menu = Menu.Gestao;
                                 break;
                             case 5:
-                                menu = Menu.Upload;
+                                menu = Menu.Playlists;
                                 break;
+                            case 6:
+                                menu = Menu.Upload;
                             case 7:
                                 return;
                             default:
@@ -136,8 +129,7 @@ public class Client {
                                 String opcao = scanner.next();
                                 album = opcao;
                                 System.out.println("Escolha: " + album);
-                                String data = Main.getAlbumData(album);
-                                System.out.println(data);
+                                Main.getAlbumData(album);
                                 menu = Menu.AlbunsExt;
                                 break;
                             case 0:
@@ -193,7 +185,7 @@ public class Client {
 
                             case 0:
                                 menu = Menu.Inicial;
-                                return;
+                                break;
                         }
                         break;
                     case Pesquisa:
@@ -201,13 +193,12 @@ public class Client {
                             case 1:
                                 System.out.println("Nome do artista:");
                                 String s = scanner.nextLine();
-                                System.out.println(Main.getArtistData(s));
+                                Main.getArtistData(s);
                                 break;
                             case 2:
                                 System.out.println("Nome do album:");
                                 String x = scanner.nextLine();
-                                System.out.println(x);
-                                System.out.println(Main.getAlbumData(x));
+                                Main.getAlbumData(x);
                                 break;
                             case 0:
                                 menu = Menu.Inicial;
@@ -219,9 +210,10 @@ public class Client {
                             case 1:
                                 // Add music
                                 System.out.println("Nome da musica para adicionar: ");
-                                String s = scanner.nextLine();
-                                System.out.println(s);
-                                if(Main.addMusic(s)) {
+                                String nomeMusica = scanner.nextLine();
+                                System.out.println("Data: (dd/mm/yyyy)");
+                                String dataMusica = scanner.nextLine();
+                                if(Main.addMusic(useratual, nomeMusica, dataMusica)) {
                                     System.out.println("Feito");
                                 } else {
                                     System.out.println("Falha");
@@ -230,9 +222,12 @@ public class Client {
                             case 2:
                                 // Add Album
                                 System.out.println("Nome do album para adicionar: ");
-                                String a = scanner.nextLine();
-                                System.out.println(a);
-                                if(Main.addAlbum(a)) {
+                                String nomeAlbum = scanner.nextLine();
+                                System.out.println("Genero Musical:");
+                                String genero = scanner.nextLine();
+                                System.out.println("Data: (dd/mm/yyyy)");
+                                String dataAlbum = scanner.nextLine();
+                                if(Main.addAlbum(useratual, nomeAlbum, genero, dataAlbum)) {
                                     System.out.println("Feito");
                                 } else {
                                     System.out.println("Falha");
@@ -246,7 +241,7 @@ public class Client {
                                 String bio = scanner.nextLine();
                                 System.out.println("Data: (dd/mm/yyyy)");
                                 String data = scanner.nextLine();
-                                if(Main.addArtist(nome, bio, data)) {
+                                if(Main.addArtist(useratual, nome, bio, data)) {
                                     System.out.println("Feito");
                                 } else {
                                     System.out.println("Falha");
@@ -257,39 +252,33 @@ public class Client {
                                 break;
                         }
                         break;
-
-                            /*
-                    case Pesquisacont:
-                        System.out.println("Termos:");
-                        String s = sc.nextLine();
-                        System.out.println(s);
-                        rmi.pesquisaArtista(s);
-                        break;/*
                     case Playlists:
                         switch(input) {
                             case 1:
-                                rmi.getPlaylists();
+
                                 break;
                             case 2:
                                 int escolha = sc.nextInt();
-                                rmi.verPlaylist(escolha);
                                 break;
                             case 3:
+                                System.out.println("Nome da Playlist:");
+                                String nomePlaylist = sc.nextLine();
                                 System.out.println("Introduza musicas para playlist: (fim para)");
                                 String musica;
-                                //lista x;
+                                ArrayList<String> musicas=new ArrayList<String>();
                                 do{
                                     musica = sc.nextLine();
-                                    //x.add(musica);
-
+                                    musicas.add(musica);
                                 }while (!musica.equals("fim"));
-                                //rmi.createPlaylist(x);
+                                int size = musicas.size();
+                                musicas.remove(size-1);
+                                System.out.println("cria playlist");
                                 break;
                             case 0:
                                 menu = Menu.Inicial;
                                 break;
                         }
-                        break;*/
+                        break;
                     case Gestao:
                         switch (input) {
                             case 1:
@@ -330,7 +319,7 @@ public class Client {
      * Enum do menu
      */
     public enum Menu {
-        Inicial, Albuns, AlbunsExt, Adicao, Pesquisa, Pesquisacont, Playlists, Gestao, Upload,
+        Inicial, Albuns, AlbunsExt, Adicao, Pesquisa, Playlists, Gestao, Upload,
     }
 
     /**
@@ -347,7 +336,8 @@ public class Client {
                 System.out.println("2 - Pesquisa");
                 System.out.println("3 - Adicionar");
                 System.out.println("4 - Gestão");
-                System.out.println("5 - Upload/Download");
+                System.out.println("5 - Playlists");
+                System.out.println("6 - Upload/Download");
                 System.out.println("7 - Sair");
                 System.out.println("-> ");
                 break;
