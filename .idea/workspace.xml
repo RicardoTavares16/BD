@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ca822dd-7f1f-436b-8107-7a7db4b2d429" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/154f0860-e743-42ce-934d-a3d36319d7bb.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/154f0860-e743-42ce-934d-a3d36319d7bb/storage_v2/_src_/schema/BD.QggAAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/154f0860-e743-42ce-934d-a3d36319d7bb/storage_v2/_src_/schema/BD.QggAAA.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BD/Client$Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BD/Client$Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BD/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BD/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BD/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BD/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -29,25 +32,39 @@
     <expand>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="oracle" type="feb32156:DbDataSourceImpl" />
+        <item name="oracle11g" type="feb32156:DbDataSourceImpl" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="oracle" type="feb32156:DbDataSourceImpl" />
+        <item name="oracle11g" type="feb32156:DbDataSourceImpl" />
         <item name="BD: schema" type="ac44c5e0:OracleImplModel$Schema" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="oracle" type="feb32156:DbDataSourceImpl" />
-        <item name="BD: schema" type="ac44c5e0:OracleImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="oracle" type="feb32156:DbDataSourceImpl" />
+        <item name="oracle11g" type="feb32156:DbDataSourceImpl" />
         <item name="BD: schema" type="ac44c5e0:OracleImplModel$Schema" />
         <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="PLAYLIST: table" type="be4db629:OracleImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="oracle11g" type="feb32156:DbDataSourceImpl" />
+        <item name="BD: schema" type="ac44c5e0:OracleImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="ALBUM: table" type="be4db629:OracleImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="oracle11g" type="feb32156:DbDataSourceImpl" />
+        <item name="BD: schema" type="ac44c5e0:OracleImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="ARTISTA: table" type="be4db629:OracleImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="oracle11g" type="feb32156:DbDataSourceImpl" />
+        <item name="BD: schema" type="ac44c5e0:OracleImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="MUSICA: table" type="be4db629:OracleImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -56,41 +73,45 @@
     <session id="1297427916">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="8" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.2" value="2" />
+          <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.43" value="1" />
+          <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="ALBUM" value="1" />
           <entry key="PLAYLIST" value="1" />
           <entry key="UTILIZADOR" value="1" />
           <entry key="java" value="5" />
-          <entry key="sql" value="4" />
+          <entry key="sql" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Database Element" value="2" />
+          <entry key="Database Element" value="3" />
           <entry key="JAVA" value="5" />
-          <entry key="Scratch" value="4" />
+          <entry key="Scratch" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2935" />
-          <entry key="sql" value="343" />
+          <entry key="java" value="4411" />
+          <entry key="sql" value="777" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2935" />
-          <entry key="Scratch" value="343" />
+          <entry key="JAVA" value="4411" />
+          <entry key="Scratch" value="777" />
         </counts>
       </usages-collector>
     </session>
@@ -98,34 +119,41 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="290" column="44" selection-start-line="290" selection-start-column="44" selection-end-line="290" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="149" selection-start-line="149" selection-end-line="149" />
+            <state relative-caret-position="-879">
+              <caret line="180" column="44" lean-forward="true" selection-start-line="180" selection-start-column="44" selection-end-line="180" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="177" column="56" selection-start-line="177" selection-start-column="56" selection-end-line="177" selection-end-column="56" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#connect#0;class#Main#0" />
+                <element signature="method#login#0;class#Main#0" />
+                <element signature="method#registo#0;class#Main#0" />
+                <element signature="method#getAlbuns#0;class#Main#0" />
+                <element signature="method#getAlbumData#0;class#Main#0" />
+                <element signature="method#editAlbumDetails#0;class#Main#0" />
+                <element signature="method#editArtistDetails#0;class#Main#0" />
+                <element signature="method#addReview#0;class#Main#0" />
+                <element signature="method#makeEditor#0;class#Main#0" />
+                <element signature="method#checkEditor#0;class#Main#0" />
+                <element signature="method#getMusicID#0;class#Main#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/154f0860-e743-42ce-934d-a3d36319d7bb/console.sql">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/42e9f300-30f4-49ee-b592-9b6e24ef1902/console.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+            <state relative-caret-position="229">
+              <caret line="40" column="14" selection-start-line="40" selection-end-line="41" />
             </state>
           </provider>
         </entry>
@@ -142,6 +170,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>get</find>
+      <find>update</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -152,8 +181,9 @@
       <list>
         <option value="$PROJECT_DIR$/src/Interface.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/b30cc5fa-4cf2-451f-8773-05ea073a3c05/console.sql" />
-        <option value="$PROJECT_DIR$/src/Client.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/154f0860-e743-42ce-934d-a3d36319d7bb/console.sql" />
+        <option value="$PROJECT_DIR$/src/Client.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/42e9f300-30f4-49ee-b592-9b6e24ef1902/console.sql" />
         <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
@@ -164,7 +194,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1620" />
@@ -178,8 +208,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -196,14 +224,16 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="oracle" />
+    <property name="DatabaseDriversLRU" value="azure&#10;oracle" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543360335830" />
-    <property name="database.console.LAST_STATE" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543427090806" />
+    <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -266,17 +296,20 @@
       <workItem from="1543345812322" duration="761000" />
       <workItem from="1543346629771" duration="4265000" />
       <workItem from="1543357709153" duration="2627000" />
+      <workItem from="1543416654921" duration="989000" />
+      <workItem from="1543417658982" duration="207000" />
+      <workItem from="1543417951974" duration="9130000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20540000" />
+    <option name="totallyTimeSpent" value="30866000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22068231" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12532134" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -285,12 +318,12 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26218852" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22341858" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39898348" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Database Console" order="7" visible="true" weight="0.32827735" />
+      <window_info anchor="bottom" id="Database Console" order="7" weight="0.3270525" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
@@ -301,7 +334,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Database" order="5" visible="true" weight="0.32622603" />
+      <window_info anchor="right" id="Database" order="5" visible="true" weight="0.1844473" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" />
@@ -323,37 +356,52 @@
       </provider>
     </entry>
     <entry file="das://154f0860-e743-42ce-934d-a3d36319d7bb/schema/BD/table/UTILIZADOR" />
-    <entry file="das://154f0860-e743-42ce-934d-a3d36319d7bb/schema/BD/table/PLAYLIST">
+    <entry file="das://154f0860-e743-42ce-934d-a3d36319d7bb/schema/BD/table/PLAYLIST" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/154f0860-e743-42ce-934d-a3d36319d7bb/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://42e9f300-30f4-49ee-b592-9b6e24ef1902/schema/BD/table/ALBUM">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client.java">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/42e9f300-30f4-49ee-b592-9b6e24ef1902/console.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="149" selection-start-line="149" selection-end-line="149" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/154f0860-e743-42ce-934d-a3d36319d7bb/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+        <state relative-caret-position="229">
+          <caret line="40" column="14" selection-start-line="40" selection-end-line="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="290" column="44" selection-start-line="290" selection-start-column="44" selection-end-line="290" selection-end-column="44" />
+        <state relative-caret-position="180">
+          <caret line="177" column="56" selection-start-line="177" selection-start-column="56" selection-end-line="177" selection-end-column="56" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#connect#0;class#Main#0" />
+            <element signature="method#login#0;class#Main#0" />
+            <element signature="method#registo#0;class#Main#0" />
+            <element signature="method#getAlbuns#0;class#Main#0" />
+            <element signature="method#getAlbumData#0;class#Main#0" />
+            <element signature="method#editAlbumDetails#0;class#Main#0" />
+            <element signature="method#editArtistDetails#0;class#Main#0" />
+            <element signature="method#addReview#0;class#Main#0" />
+            <element signature="method#makeEditor#0;class#Main#0" />
+            <element signature="method#checkEditor#0;class#Main#0" />
+            <element signature="method#getMusicID#0;class#Main#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-879">
+          <caret line="180" column="44" lean-forward="true" selection-start-line="180" selection-start-column="44" selection-end-line="180" selection-end-column="44" />
         </state>
       </provider>
     </entry>

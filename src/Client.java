@@ -126,10 +126,9 @@ public class Client {
                         switch (input) {
                             case 1:
                                 System.out.println("Introduza o nome do album:");
-                                String opcao = scanner.next();
-                                album = opcao;
-                                System.out.println("Escolha: " + album);
-                                Main.getAlbumData(album);
+                                String opcao = scanner.nextLine();
+                                System.out.println("Escolha: " + opcao);
+                                Main.getAlbumData(opcao);
                                 menu = Menu.AlbunsExt;
                                 break;
                             case 0:
@@ -155,18 +154,8 @@ public class Client {
                                 }
                                 break;
                             case 2:
-                                System.out.println("Editar Nome:");
-                                String name = scanner.nextLine();
-                                if (Main.editAlbumName(useratual, album, name)) {
-                                    System.out.println("Sucesso");
-                                } else {
-                                    System.out.println("Falha");
-                                }
-                                break;
-
-                            case 3:
                                 // detalhes
-                                System.out.println("Editar Detalhes:");
+                                System.out.println("Editar Genero:");
                                 String details = scanner.nextLine();
                                 if (Main.editAlbumDetails(useratual, album, details)) {
                                     System.out.println("Sucesso");
@@ -174,17 +163,6 @@ public class Client {
                                     System.out.println("Falha");
                                 }
                                 break;
-
-                            case 4:
-                                // musicas
-                                System.out.println("Editar Musicas");
-                                if (Main.editAlbumData(useratual, album)) {
-                                    System.out.println("Sucesso");
-                                } else {
-                                    System.out.println("Falha");
-                                }
-                                break;
-
                             case 0:
                                 menu = Menu.Inicial;
                                 break;
@@ -196,6 +174,20 @@ public class Client {
                                 System.out.println("Nome do artista:");
                                 String s = scanner.nextLine();
                                 Main.getArtistData(s);
+                                System.out.println("1 - Editar Bio");
+                                System.out.println("0 - Voltar");
+                                System.out.println("-> ");
+                                int op = sc.nextInt();
+                                if(op == 1){
+                                    System.out.println("Nova Biografia:");
+                                    String bio = scanner.nextLine();
+                                    if(Main.editArtistDetails(useratual, s, bio)){
+                                        System.out.println("Sucesso");
+                                    }
+                                    else
+                                        System.out.println("Erro");
+                                        break;
+                                }
                                 break;
                             case 2:
                                 System.out.println("Nome do album:");
@@ -352,9 +344,7 @@ public class Client {
             case AlbunsExt:
                 System.out.println("-----Informação-----");
                 System.out.println("1 - Escrever Critica");
-                System.out.println("2 - Editar Nome");
-                System.out.println("3 - Editar Detalhes");
-                System.out.println("4 - Editar Musicas");
+                System.out.println("2 - Editar Genero");
                 System.out.println("0 - Voltar");
                 System.out.println("-> ");
                 break;

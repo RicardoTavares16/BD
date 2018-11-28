@@ -96,7 +96,6 @@ public class Main {
             } else
                 return false;
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return false;
     }
@@ -176,12 +175,12 @@ public class Main {
     public void getAlbunsByArtist(String nameArtist) {
         ResultSet res;
         String tmp;
-        String query = String.format("SELECT * FROM artista art, album a, album_artista aa WHERE aa.album_idalbum = a.idalbum AND aa.artista_idartista = art.idartista AND art.name like '%s'", nameArtist);
+        String query = String.format("SELECT a.nome NOME FROM artista art, album a, album_artista aa WHERE aa.album_idalbum = a.idalbum AND aa.artista_idartista = art.idartista AND art.nome like '%s'", nameArtist);
         try {
             res = stmt.executeQuery(query);
 
             while (res.next()) {
-                tmp = res.getString("nome");
+                tmp = res.getString("NOME");
                 System.out.println(tmp);
             }
         } catch (SQLException e) {
@@ -190,9 +189,22 @@ public class Main {
         }
     }
 
+    public void getMusicByArtist(String nameArtist){
+
+        String query = String.format("SELECT m.nome MUSICA FROM ARTISTA a, MUSICA m, MUSICA_ARTISTA ma WHERE m.IDMUSICA = ma.MUSICA_IDMUSICA AND a.IDARTISTA = ma.ARTISTA_IDARTISTA AND a.IDARTISTA = %d", getArtistID(nameArtist));
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                System.out.println("Nome: " + res.getString("MUSICA"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro");
+        }
+    }
+
     public void getAlbumData(String x){
         String query = String.format("SELECT nome, genero, data FROM album WHERE nome like '%s'", x);
-
+        String queryReviews = String.format("SELECT a.nome, u.USERNAME, c.TEXTO, c.PONTUACAO from ALBUM a, CRITICA c, UTILIZADOR u,CRITICA_ALBUM ca, CRITICA_UTILIZADOR cu WHERE ca.ALBUM_IDALBUM = a.IDALBUM AND ca.CRITICA_IDCRITICA = c.IDCRITICA AND cu.UTILIZADOR_USERNAME = u.USERNAME AND cu.CRITICA_IDCRITICA = c.IDCRITICA AND a.IDALBUM = %d", getAlbumID(x));
         try {
             ResultSet res = stmt.executeQuery(query);
             while(res.next()) {
@@ -200,6 +212,19 @@ public class Main {
                 System.out.println("Género: " + res.getString("genero"));
                 System.out.println("Data de lançamento: " + res.getString("data"));
             }
+
+            System.out.println("-----Musicas-----");
+            musicByAlbum(x);
+
+            System.out.println("-----CRITICAS-----");
+            ResultSet res1 = stmt.executeQuery(queryReviews);
+            while(res1.next()) {
+                System.out.print("Username: " + res1.getString("USERNAME"));
+                System.out.print(" Texto: " + res1.getString("TEXTO"));
+                System.out.print(" Pontuação: " + res1.getString("PONTUACAO"));
+                System.out.println();
+            }
+
         } catch (SQLException e) {
             System.out.println("Erro ao obter informações de album");
         }
@@ -223,26 +248,64 @@ public class Main {
         System.out.println("Alguns lançados:");
         getAlbunsByArtist(x);
 
-    }
+        System.out.println("Musicas associadas:");
+        getMusicByArtist(x);
 
-    public Boolean editAlbumData(String user, String nomeAlbum){
-        return true;
-    }
-
-    public Boolean editAlbumName(String user, String nomeAtual, String name){
-        return true;
     }
 
     public Boolean editAlbumDetails (String user, String nomeAlbum, String details){
-        return true;
+
+        if(checkEditor(user)) {
+            String query = String.format("UPDATE ALBUM SET GENERO = '%s' WHERE NOME like '%s'", details, nomeAlbum);
+            try {
+                stmt.executeQuery(query);
+            } catch (SQLException e) {
+                System.out.println("Erro ao editar album.");
+                return false;
+            }
+            return true;
+        }
+        else
+            return false;
     }
 
-    // @TODO: PASSAR A USAR IDS
+    public Boolean editArtistDetails (String user, String nome, String details){
+
+        if(checkEditor(user)) {
+            String query = String.format("UPDATE ARTISTA SET BIOGRAFIA = '%s' WHERE NOME like '%s'", details, nome);
+            try {
+                stmt.executeQuery(query);
+            } catch (SQLException e) {
+                System.out.println("Erro ao editar artista.");
+                return false;
+            }
+            return true;
+        }
+        else
+            return false;
+    }
+
     public Boolean addReview(String user, String album, String review, int score){
 
-        String query = String.format("INSERT INTO CRITICA (IDCRITICA, TEXTO, PONTUACAO, UTILIZADOR_USERNAME, ALBUM_IDALBUM) VALUES (idcritica_seq.nextval, '%s', %d, '%s', 1)", review, score, user);
+        String query = String.format("INSERT INTO CRITICA (IDCRITICA, TEXTO, PONTUACAO) VALUES (idcritica_seq.nextval, '%s', %d)", review, score);
+        String query1 = String.format("INSERT INTO CRITICA_ALBUM (album_idalbum, critica_idcritica)  SELECT a.IDALBUM, c.IDCRITICA FROM CRITICA c, ALBUM a WHERE a.IDALBUM = %d AND c.IDCRITICA = (SELECT MAX(IDCRITICA) FROM CRITICA)", getAlbumID(album));
+        String query2 = String.format("INSERT INTO CRITICA_UTILIZADOR (utilizador_username, critica_idcritica) SELECT u.USERNAME, c.IDCRITICA FROM UTILIZADOR u, CRITICA c WHERE u.USERNAME like '%s' AND c.IDCRITICA = (SELECT MAX(IDCRITICA) FROM CRITICA)", user);
         try {
             stmt.executeQuery(query);
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            System.out.println("Não foi possível adicionar review");
+            return false;
+        }
+        try {
+            stmt.executeQuery(query1);
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            System.out.println("Não foi possível adicionar review");
+            return false;
+        }
+        try {
+            stmt.executeQuery(query2);
         } catch (SQLException e) {
             //e.printStackTrace();
             System.out.println("Não foi possível adicionar review");
@@ -296,6 +359,62 @@ public class Main {
         } catch (SQLException e) {
             System.out.println("Não foi possível inserir lista");
         }
+    }
+
+    public int getAlbumID(String nome){
+        int id = -1;
+        String query = String.format("SELECT IDALBUM FROM ALBUM WHERE nome like '%s'", nome);
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                id = res.getInt("IDALBUM");
+            }
+        } catch (SQLException e) {
+            System.out.println("Album não existe");
+        }
+        return id;
+    }
+
+    public int getArtistID(String nome){
+        int id = -1;
+        String query = String.format("SELECT IDARTISTA FROM ARTISTA WHERE nome like '%s'", nome);
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                id = res.getInt("IDARTISTA");
+            }
+        } catch (SQLException e) {
+            System.out.println("Artista não existe");
+        }
+        return id;
+    }
+
+    public int getMusicID(String nome){
+        int id = -1;
+        String query = String.format("SELECT IDMUSICA FROM MUSICA WHERE nome like '%s'", nome);
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                id = res.getInt("IDALBUM");
+            }
+        } catch (SQLException e) {
+            System.out.println("Album não existe");
+        }
+        return id;
+    }
+
+    public void musicByAlbum(String album){
+
+        String query = String.format("SELECT a.nome Album, m.nome Musica FROM ALBUM a, MUSICA m, MUSICA_ALBUM ma WHERE m.IDMUSICA = ma.MUSICA_IDMUSICA AND a.IDALBUM = ma.ALBUM_IDALBUM AND a.IDALBUM = %d", getAlbumID(album));
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                System.out.println("Nome: " + res.getString("Musica"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Album não existe");
+        }
+
     }
 
 
