@@ -1,4 +1,3 @@
-import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,29 +51,6 @@ public class Main {
                 System.out.println("Erro nao foi possível criar uma statement ou retornou null");
                 System.exit(-1);
             }
-            /*
-            String query = "SELECT * FROM EMP";
-            System.out.println("querying: "+ query);
-            ResultSet res = stmt.executeQuery(query);
-
-            // para podermos saber quantas colunas o resultado tem
-            ResultSetMetaData rsmd = res.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
-
-            //SABER AS VARIAVEIS
-            /*for(int i = 1 ; i <= columnsNumber ; i++){
-                System.out.print(rsmd.getColumnName(i) +", ");
-            }*/
-/*
-            while (res.next()) {
-                // Listar o resultado da query
-                for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(",  ");
-                    String columnValue = res.getString(i);
-                    System.out.print(columnValue);
-                }
-                System.out.println("");
-            }*/
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -173,29 +149,37 @@ public class Main {
     }
 
     public void getAlbunsByArtist(String nameArtist) {
-        ResultSet res;
-        String tmp;
-        String query = String.format("SELECT a.nome NOME FROM artista art, album a, album_artista aa WHERE aa.album_idalbum = a.idalbum AND aa.artista_idartista = art.idartista AND art.nome like '%s'", nameArtist);
+        String query = String.format("SELECT a.nome FROM artista art, album a, album_artista aa WHERE aa.album_idalbum = a.idalbum AND aa.artista_idartista = art.idartista AND art.nome like '%s'", nameArtist);
         try {
-            res = stmt.executeQuery(query);
-
+            ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
-                tmp = res.getString("NOME");
-                System.out.println(tmp);
+                System.out.println("Nome: " + res.getString("NOME"));
             }
         } catch (SQLException e) {
-            System.out.println("Não foi possível obter albuns");
-            return;
+            System.out.println("Erro");
         }
     }
 
     public void getMusicByArtist(String nameArtist){
 
-        String query = String.format("SELECT m.nome MUSICA FROM ARTISTA a, MUSICA m, MUSICA_ARTISTA ma WHERE m.IDMUSICA = ma.MUSICA_IDMUSICA AND a.IDARTISTA = ma.ARTISTA_IDARTISTA AND a.IDARTISTA = %d", getArtistID(nameArtist));
+        String query = String.format("SELECT m.nome FROM ARTISTA a, MUSICA m, MUSICA_ARTISTA ma WHERE m.IDMUSICA = ma.MUSICA_IDMUSICA AND a.IDARTISTA = ma.ARTISTA_IDARTISTA AND a.IDARTISTA = %d", getArtistID(nameArtist));
         try {
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
-                System.out.println("Nome: " + res.getString("MUSICA"));
+                System.out.println("Nome: " + res.getString("NOME"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro");
+        }
+    }
+
+    public void getMusicians(String name){
+
+        String query = String.format("SELECT m.nomemusico FROM MUSICO m, ARTISTA a, MUSICO_ARTISTA ma WHERE m.NOMEMUSICO = ma.MUSICO_NOME AND a.IDARTISTA = ma.ARTISTA_IDARTISTA AND a.NOME = '%s'", name);
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                System.out.println("Nome: " + res.getString("NOMEMUSICO"));
             }
         } catch (SQLException e) {
             System.out.println("Erro");
@@ -244,6 +228,9 @@ public class Main {
         } catch (SQLException e) {
             System.out.println("Erro ao obter informações do artista");
         }
+
+        System.out.println("Musicos da Banda: ");
+        getMusicians(x);
 
         System.out.println("Alguns lançados:");
         getAlbunsByArtist(x);
@@ -350,15 +337,37 @@ public class Main {
         return false;
     }
 
-    // @TODO:Fazer esta parte
-    public void makePlaylist(String user, String nome, ArrayList<String> lista){
+    public boolean makePlaylist(String user, String nome, ArrayList<String> lista){
 
-        String query = String.format("INSERT INTO playlist (IDPLAYLIST, NOME, UTILIZADOR_USERNAME) VALUES (idplaylist_seq.nextval, '%s', '%s'", nome, user);
+        String query = String.format("INSERT INTO PLAYLIST (IDPLAYLIST, NOME) VALUES (IDPLAYLIST_SEQ.nextval, '%s')", nome);
+        String query2 = String.format("INSERT INTO UTILIZADOR_PLAYLIST (utilizador_username, playlist_idplaylist) SELECT u.USERNAME, p.IDPLAYLIST FROM UTILIZADOR u, PLAYLIST p WHERE u.USERNAME like '%s' AND p.IDPLAYLIST = (SELECT MAX(IDPLAYLIST) FROM PLAYLIST)", user);
+
         try {
             stmt.executeQuery(query);
         } catch (SQLException e) {
             System.out.println("Não foi possível inserir lista");
+            return false;
         }
+
+        try {
+            stmt.executeQuery(query2);
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            System.out.println("Não foi possível inserir lista");
+            return false;
+        }
+
+        try {
+            for (String temp : lista) {
+                String query3 = String.format("INSERT INTO PLAYLIST_MUSICA (PLAYLIST_IDPLAYLIST, MUSICA_IDMUSICA) SELECT p.IDPLAYLIST, m.IDMUSICA FROM PLAYLIST p, MUSICA m WHERE m.IDMUSICA = %d AND p.IDPLAYLIST = (SELECT MAX(IDPLAYLIST) FROM PLAYLIST)", getMusicID(temp));
+                stmt.executeQuery(query3);
+            }
+        } catch (SQLException e) {
+            System.out.println("Não foi possível inserir lista");
+            return false;
+        }
+
+        return true;
     }
 
     public int getAlbumID(String nome){
@@ -395,10 +404,24 @@ public class Main {
         try {
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
-                id = res.getInt("IDALBUM");
+                id = res.getInt("IDMUSICA");
             }
         } catch (SQLException e) {
-            System.out.println("Album não existe");
+            System.out.println("Musica não existe");
+        }
+        return id;
+    }
+
+    public int getPlaylistID(String nome){
+        int id = -1;
+        String query = String.format("SELECT IDPLAYLIST FROM PLAYLIST WHERE nome like '%s'", nome);
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                id = res.getInt("IDPLAYLIST");
+            }
+        } catch (SQLException e) {
+            System.out.println("Musica não existe");
         }
         return id;
     }
@@ -417,6 +440,73 @@ public class Main {
 
     }
 
+    public void playlists(){
 
+        String query = String.format("SELECT p.nome, u.USERNAME FROM PLAYLIST p, UTILIZADOR u, UTILIZADOR_PLAYLIST up WHERE up.UTILIZADOR_USERNAME = u.USERNAME and up.PLAYLIST_IDPLAYLIST = p.IDPLAYLIST ORDER BY u.USERNAME");
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                System.out.println("Nome Playlist: " + res.getString("NOME"));
+                System.out.println("Autor: " + res.getString("USERNAME"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro");
+        }
+
+    }
+
+    public void getPlaylistInfo(String nome){
+
+        String query = String.format("SELECT m.nome FROM MUSICA m, PLAYLIST p, UTILIZADOR u, UTILIZADOR_PLAYLIST up, PLAYLIST_MUSICA pa WHERE p.IDPLAYLIST = up.PLAYLIST_IDPLAYLIST AND u.USERNAME = up.UTILIZADOR_USERNAME AND m.IDMUSICA = pa.MUSICA_IDMUSICA AND p.IDPLAYLIST = pa.PLAYLIST_IDPLAYLIST   AND IDPLAYLIST = %d", getPlaylistID(nome));
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                System.out.println("Musica: " + res.getString("NOME"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro");
+        }
+
+    }
+
+    public void musicList(){
+        String query = String.format("SELECT IDMUSICA, NOME FROM MUSICA");
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                System.out.println("ID: " + res.getString("IDMUSICA"));
+                System.out.println("Nome: " + res.getString("NOME"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro");
+        }
+    }
+
+    public boolean upload(String nome, String caminho){
+
+        String query = String.format("UPDATE MUSICA SET FICHEIRO = '%s' WHERE IDMUSICA = %d", caminho, getMusicID(nome));
+        try {
+            stmt.executeQuery(query);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro");
+            return false;
+        }
+    }
+
+    public boolean download(String nome){
+
+        String query = String.format("SELECT ficheiro FROM MUSICA WHERE IDMUSICA = %d", getMusicID(nome));
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                System.out.println("Nome: " + res.getString("FICHEIRO"));
+            }
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro");
+            return false;
+        }
+    }
 
 }

@@ -116,6 +116,7 @@ public class Client {
                                 break;
                             case 6:
                                 menu = Menu.Upload;
+                                break;
                             case 7:
                                 return;
                             default:
@@ -249,13 +250,17 @@ public class Client {
                     case Playlists:
                         switch(input) {
                             case 1:
-
+                                Main.playlists();
                                 break;
                             case 2:
-                                int escolha = sc.nextInt();
+                                System.out.println("Nome da Playlist:");
+                                sc.nextLine();
+                                String escolha = sc.nextLine();
+                                Main.getPlaylistInfo(escolha);
                                 break;
                             case 3:
                                 System.out.println("Nome da Playlist:");
+                                sc.nextLine();
                                 String nomePlaylist = sc.nextLine();
                                 System.out.println("Introduza musicas para playlist: (fim para)");
                                 String musica;
@@ -291,10 +296,20 @@ public class Client {
                     case Upload:
                         switch (input) {
                             case 1:
-                                //rmi.upload(file);
+                                Main.musicList();
+                                System.out.println("Qual a musica que quer carregar?");
+                                sc.nextLine();
+                                String nome = sc.nextLine();
+                                System.out.println("Qual é a directoria?");
+                                String path = sc.nextLine();
+                                Main.upload(nome, path);
                                 break;
                             case 2:
-                                //rmi.download(file);
+                                Main.musicList();
+                                System.out.println("Qual a musica que quer descarregar?");
+                                sc.nextLine();
+                                String nome2 = sc.nextLine();
+                                Main.download(nome2);
                                 break;
                             case 0:
                                 menu = Menu.Inicial;
