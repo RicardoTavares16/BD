@@ -1,0 +1,82 @@
+INSERT INTO artista (idartista, nome, biografia, data) VALUES (IDARTISTA_SEQ.nextval, 'Linkin Park', 'Rock Band', TO_DATE('01/01/1996', 'dd/mm/yyyy'));
+INSERT INTO artista (idartista, nome, biografia, data) VALUES (IDARTISTA_SEQ.nextval, 'Pink Floyd', 'Banda brit‰nica de rock, formada em Londres.', TO_DATE('01/01/1965', 'dd/mm/yyyy'));
+
+INSERT INTO utilizador (username, password, editor) VALUES ('admin', 'qwe1', 1);
+INSERT INTO utilizador (username, password, editor) VALUES ('ola', 'ola', 0);
+
+INSERT INTO album (idalbum, nome, genero, data) VALUES (IDALBUM_SEQ.nextval, 'Meteora', 'Rock', TO_DATE('25/03/2003', 'dd/mm/yyyy'));
+INSERT INTO album (idalbum, nome, genero, data) VALUES (IDALBUM_SEQ.nextval, 'The Wall', 'Rock', TO_DATE('30/11/1979', 'dd/mm/yyyy'));
+
+INSERT INTO musica (idmusica, nome, data) VALUES (IDMUSICA_SEQ.nextval, 'Numb', TO_DATE('25/03/2003', 'dd/mm/yyyy'));
+INSERT INTO musica (idmusica, nome, data) VALUES (IDMUSICA_SEQ.nextval, 'Comfortably Numb', TO_DATE('30/11/1979', 'dd/mm/yyyy'));
+INSERT INTO musica (idmusica, nome, data) VALUES (IDMUSICA_SEQ.nextval, 'Faint', TO_DATE('25/03/2003', 'dd/mm/yyyy'));
+
+
+INSERT INTO PLAYLIST (IDPLAYLIST, NOME) VALUES (IDPLAYLIST_SEQ.nextval, 'Rock');
+INSERT INTO PLAYLIST (IDPLAYLIST, NOME) VALUES (IDPLAYLIST_SEQ.nextval, 'playlist1');
+
+INSERT INTO musico (nomemusico, instrumento) VALUES ('Roger Waters', 'Guitarrista/Baixista/Cantor');
+INSERT INTO musico (nomemusico, instrumento) VALUES ('David Gilmour', 'Guitarrista/Saxofonista/Cantor');
+
+
+INSERT INTO musica_album (musica_idmusica, album_idalbum) SELECT m.IDMUSICA, a.IDALBUM FROM MUSICA m, ALBUM a WHERE IDALBUM = 1 AND IDMUSICA = 1;
+INSERT INTO musica_album (musica_idmusica, album_idalbum) SELECT m.IDMUSICA, a.IDALBUM FROM MUSICA m, ALBUM a WHERE IDALBUM = 1 AND IDMUSICA = 3;
+INSERT INTO musica_album (musica_idmusica, album_idalbum) SELECT m.IDMUSICA, a.IDALBUM FROM MUSICA m, ALBUM a WHERE IDALBUM = 2 AND IDMUSICA = 2;
+
+INSERT INTO MUSICO_ARTISTA (ARTISTA_IDARTISTA, MUSICO_NOME) SELECT a.IDARTISTA, m.NOMEMUSICO FROM ARTISTA a, MUSICO m WHERE m.NOMEMUSICO like 'Roger Waters' AND a.IDARTISTA = 2;
+INSERT INTO MUSICO_ARTISTA (ARTISTA_IDARTISTA, MUSICO_NOME) SELECT a.IDARTISTA, m.NOMEMUSICO FROM ARTISTA a, MUSICO m WHERE m.NOMEMUSICO like 'David Gilmour' AND a.IDARTISTA = 2;
+
+
+INSERT INTO UTILIZADOR_PLAYLIST (utilizador_username, playlist_idplaylist) SELECT u.USERNAME, p.IDPLAYLIST FROM UTILIZADOR u, PLAYLIST p WHERE p.IDPLAYLIST = 2 AND u.USERNAME like 'admin';
+INSERT INTO PLAYLIST_MUSICA (PLAYLIST_IDPLAYLIST, MUSICA_IDMUSICA) SELECT p.IDPLAYLIST, m.IDMUSICA FROM PLAYLIST p, MUSICA m WHERE p.IDPLAYLIST = 2 AND m.IDMUSICA = 2;
+INSERT INTO PLAYLIST_MUSICA (PLAYLIST_IDPLAYLIST, MUSICA_IDMUSICA) SELECT p.IDPLAYLIST, m.IDMUSICA FROM PLAYLIST p, MUSICA m WHERE p.IDPLAYLIST = 2 AND m.IDMUSICA = 3;
+
+INSERT INTO CRITICA (IDCRITICA, TEXTO, PONTUACAO) VALUES (IDCRITICA_SEQ.nextval, 'Bom album!', 4);
+INSERT INTO CRITICA_ALBUM (album_idalbum, critica_idcritica)  SELECT a.IDALBUM, c.IDCRITICA FROM CRITICA c, ALBUM a WHERE a.IDALBUM = 2 AND c.IDCRITICA = 1;
+INSERT INTO CRITICA_UTILIZADOR (utilizador_username, critica_idcritica) SELECT u.USERNAME, c.IDCRITICA FROM UTILIZADOR u, CRITICA c WHERE c.IDCRITICA = 1 AND u.USERNAME like 'admin';
+
+INSERT INTO MUSICA_ARTISTA (musica_idmusica, artista_idartista) SELECT m.IDMUSICA, a.IDARTISTA FROM MUSICA m, ARTISTA a WHERE a.IDARTISTA = 1 AND m.IDMUSICA = 1;
+INSERT INTO MUSICA_ARTISTA (musica_idmusica, artista_idartista) SELECT m.IDMUSICA, a.IDARTISTA FROM MUSICA m, ARTISTA a WHERE a.IDARTISTA = 1 AND m.IDMUSICA = 3;
+
+INSERT INTO ALBUM_ARTISTA (album_idalbum, artista_idartista) SELECT a.IDALBUM, art.IDARTISTA FROM ALBUM a, ARTISTA art WHERE a.IDALBUM = 1 AND art.IDARTISTA = 1;
+INSERT INTO ALBUM_ARTISTA (album_idalbum, artista_idartista) SELECT a.IDALBUM, art.IDARTISTA FROM ALBUM a, ARTISTA art WHERE a.IDALBUM = 2 AND art.IDARTISTA = 2;
+
+
+
+
+
+
+
+
+
+
+
+
+-- Alguns dos selects utilizados (funções não necessárias a correr)
+
+SELECT p.nome, m.nome
+FROM PLAYLIST p, MUSICA m, PLAYLIST_MUSICA pm WHERE p.IDPLAYLIST = 2 AND m.IDMUSICA = pm.MUSICA_IDMUSICA AND p.IDPLAYLIST = pm.PLAYLIST_IDPLAYLIST;
+
+SELECT a.nome, u.USERNAME, c.TEXTO, c.PONTUACAO
+from ALBUM a, CRITICA c, UTILIZADOR u,CRITICA_ALBUM ca, CRITICA_UTILIZADOR cu
+WHERE ca.ALBUM_IDALBUM = a.IDALBUM AND ca.CRITICA_IDCRITICA = c.IDCRITICA AND cu.UTILIZADOR_USERNAME = u.USERNAME AND cu.CRITICA_IDCRITICA = c.IDCRITICA AND a.IDALBUM = 2;
+
+
+-- Músicas contidas no albúm "Meteora"
+SELECT a.nome, m.nome FROM ALBUM a, MUSICA m, MUSICA_ALBUM ma WHERE m.IDMUSICA = ma.MUSICA_IDMUSICA AND a.IDALBUM = ma.ALBUM_IDALBUM AND a.IDALBUM = 1;
+
+
+SELECT a.nome, m.nome FROM ARTISTA a, MUSICA m, MUSICA_ARTISTA ma WHERE m.IDMUSICA = ma.MUSICA_IDMUSICA AND a.IDARTISTA = ma.ARTISTA_IDARTISTA AND a.IDARTISTA = 3;
+
+-- carregar ficheiro
+
+UPDATE MUSICA SET FICHEIRO = '/' WHERE IDMUSICA = 4;
+
+-- todas as playlist por utilizador
+SELECT p.nome, u.USERNAME FROM PLAYLIST p, UTILIZADOR u, UTILIZADOR_PLAYLIST up WHERE up.UTILIZADOR_USERNAME = u.USERNAME and up.PLAYLIST_IDPLAYLIST = p.IDPLAYLIST ORDER BY u.USERNAME;
+
+-- playlists de um utilizador
+SELECT m.nome FROM MUSICA m, PLAYLIST p, UTILIZADOR u, UTILIZADOR_PLAYLIST up, PLAYLIST_MUSICA pa
+WHERE p.IDPLAYLIST = up.PLAYLIST_IDPLAYLIST AND u.USERNAME = up.UTILIZADOR_USERNAME AND m.IDMUSICA = pa.MUSICA_IDMUSICA AND p.IDPLAYLIST = pa.PLAYLIST_IDPLAYLIST
+AND IDPLAYLIST = 4;
+

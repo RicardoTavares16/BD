@@ -1,0 +1,1 @@
+Projects developed for the subject **Databases** (2018/2019 edition) of the Bachelor's Degree in Informatics Engineering course, from the University of Coimbra.
